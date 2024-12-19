@@ -26,15 +26,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Install Chromium and ChromeDriver
+    - name: Start Flask server
       run: |
-        sudo apt-get update
-        sudo apt-get install -y chromium-browser chromium-chromedriver
-
-    - name: Test ChromeDriver
-      run: |
-        chromedriver --version
-        chromium-browser --version
+        export FLASK_APP=app/api.py
+        nohup flask run --host=0.0.0.0 --port=5000 &
+        sleep 5  # Poczekaj, aż serwer się uruchomi
 
     - name: Run tests
       run: pytest tests/ --maxfail=5 -v
