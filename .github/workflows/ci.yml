@@ -10,25 +10,31 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-    # 1. Checkout the repository
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # 2. Set up Python
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
         python-version: 3.9
 
-    # 3. Install dependencies
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # 4. Run tests
+    - name: Start Flask app
+      run: |
+        python -m flask run &
+        sleep 5
+
+    - name: Install WebDriver
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y firefox-geckodriver
+
     - name: Run tests
-      run: pytest tests/
+      run: pytest tests/ --maxfail=5 -v
