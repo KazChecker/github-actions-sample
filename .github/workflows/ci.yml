@@ -33,4 +33,4 @@ jobs:
         sleep 5  # Poczekaj, aż serwer się uruchomi
 
     - name: Run tests
-      run: pytest tests/ --maxfail=5 -v --ignore=tests/test_webdriver.py
+      run: pytest tests/ --maxfail=5 -v --ignore=tests/test_calculate_net_ui.py --ignore=tests/test_calculate_gross_ui.py 
