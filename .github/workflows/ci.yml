@@ -29,7 +29,7 @@ jobs:
     - name: Install jq
       run: sudo apt-get install -y jq
 
-    - name: Install Firefox and WebDriver
+    - name: Install Firefox and Geckodriver
       run: |
         sudo apt-get update
         sudo apt-get install -y firefox
@@ -39,10 +39,10 @@ jobs:
         sudo mv geckodriver /usr/local/bin/
         rm geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
 
-    - name: Start Flask app
+    - name: Test Firefox and Geckodriver
       run: |
-        python -m flask run &
-        sleep 5
+        geckodriver --version
+        firefox --version
 
     - name: Run tests
       run: pytest tests/ --maxfail=5 -v
