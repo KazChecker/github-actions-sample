@@ -22,7 +22,7 @@ def calculate_net(brutto, tax_rate):
     Net = Gross / (1 + Tax Rate / 100).
     (od sta)
     """
-    return brutto / (1 + tax_rate / 100)
+    return round(brutto / (1 + tax_rate / 100), 2)
 
 
 def calculate_brutto(netto, tax_rate):
